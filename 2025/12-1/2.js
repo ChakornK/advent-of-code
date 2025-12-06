@@ -7,13 +7,14 @@ const main = (inp, exp = null) => {
   let pos = 50;
   let counter = 0;
   for (const line of inp.split("\n")) {
-    const d = line.slice(0, 1);
-    const n = +line.slice(1) * (d === "R" ? 1 : -1);
-    pos = (pos + n) % 100;
-    if (pos < 0) {
-      pos += 100;
+    const d = line.slice(0, 1) === "R" ? 1 : -1;
+    const n = +line.slice(1);
+    for (let i = 0; i < n; i++) {
+      pos = (pos + d) % 100;
+      if (pos === 0) {
+        counter++;
+      }
     }
-    if (pos === 0) counter++;
   }
 
   if (exp != null && counter !== exp) {
@@ -23,5 +24,5 @@ const main = (inp, exp = null) => {
   }
 };
 
-console.log("Test 1:", main(input0, 3));
+console.log("Test 1:", main(input0, 6));
 console.log("Test 2:", main(input1));
