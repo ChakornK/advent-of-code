@@ -7,14 +7,17 @@ const main = (inp, exp = null) => {
   let pos = 50;
   let counter = 0;
   for (const line of inp.split("\n")) {
-    const d = line.slice(0, 1) === "R" ? 1 : -1;
+    const d = line[0] === "R" ? 1 : -1;
     const n = +line.slice(1);
-    for (let i = 0; i < n; i++) {
-      pos = (pos + d) % 100;
-      if (pos === 0) {
-        counter++;
-      }
+
+    // calculate min rotation distance to pass 0 from current position
+    let r = d === 1 ? (100 - pos) % 100 : pos % 100;
+    if (r === 0) r = 100;
+    if (n >= r) {
+      counter += 1 + (((n - r) / 100) >> 0);
     }
+    pos = (pos + d * n) % 100;
+    if (pos < 0) pos += 100;
   }
 
   if (exp != null && counter !== exp) {
