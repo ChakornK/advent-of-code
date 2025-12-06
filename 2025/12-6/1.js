@@ -4,7 +4,7 @@ const input0 = fs.readFileSync("./input0.txt", "utf-8");
 const input1 = fs.readFileSync("./input1.txt", "utf-8");
 
 const main = (inp, exp = null) => {
-  // rotate input 90deg ccw
+  // transpose input
   const lines = inp.split("\n").map((ln) => ln.split(/ +/).filter(Boolean));
   const ops = [];
   while (lines.length > 0) {
